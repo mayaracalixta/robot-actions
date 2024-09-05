@@ -23,7 +23,6 @@ jobs:
       uses: actions/setup-python@v5.2.0
       with:
         python-version: 3.12
-        
 
     - name: Install deps
       run: |
@@ -34,3 +33,7 @@ jobs:
       run: |
         rfbrowser init
        
+
+    - name: Run E2E
+      run: |
+        robot -d ./logs -i smoke tests
