@@ -14,15 +14,15 @@ jobs:
     - name: Get code
       uses: actions/checkout@v4
       
-    - name:  Setup node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+  #  - name:  Setup node
+  #    uses: actions/setup-node@v4
+  #    with:
+  #      node-version: 20
         
-    - name: Setup python
-      uses: actions/setup-python@v5.2.0
-      with:
-        python-version: 3.12
+  #  - name: Setup python
+  #    uses: actions/setup-python@v5.2.0
+  #    with:
+  #      python-version: 3.12
 
     - name: Install deps
       run: |
