@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  tests:
+  chrome:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,16 +35,54 @@ jobs:
        
     - name: Run E2E
       run: |
-        robot -d ./logs tests
+        robot -d ./logs -v BROWSER:chromium tests
 
     - name: Robot Reporter
       uses: joonvena/robotframework-reporter-action@v2.4
+      if: always()
       with:
         gh_access_token: ${{secrets.GITHUB_TOKEN}}
         report_path: logs
         
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.2.1-node20
+      if: always()
       with:
-        name: Relatório de execução 
+        name: Test Report
+        path: logs
+
+
+  firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get code
+      uses: actions/checkout@v4
+    
+
+    - name: Install deps
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Browser Init
+      run: |
+        rfbrowser init
+       
+    - name: Run E2E
+      run: |
+        robot -d ./logs -v BROWSER:firefox tests
+
+    - name: Robot Reporter
+      uses: joonvena/robotframework-reporter-action@v2.4
+      if: always()
+      with:
+        gh_access_token: ${{secrets.GITHUB_TOKEN}}
+        report_path: logs
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.2.1-node20
+      if: always()
+      with:
+        name: Test Report
         path: logs
