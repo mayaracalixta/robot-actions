@@ -48,7 +48,7 @@ jobs:
       uses: actions/upload-artifact@v3.2.1-node20
       if: always()
       with:
-        name: Test Report
+        name: Chorme Test Report
         path: logs
 
 
@@ -84,5 +84,5 @@ jobs:
       uses: actions/upload-artifact@v3.2.1-node20
       if: always()
       with:
-        name: Test Report
+        name: Firefox Test Report
         path: logs
